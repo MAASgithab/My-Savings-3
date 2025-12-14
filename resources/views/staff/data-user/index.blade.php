@@ -17,6 +17,7 @@
             <th scope="col">Nama</th>
             <th scope="col">Email</th>
             <th scope="col">Role</th>
+            <th scope="col">Waktu Bergabung</th>
             <th scope="col">Aksi</th>
         </tr>
     </thead>
@@ -27,6 +28,7 @@
             <td>{{ $user->name }}</td>
             <td>{{ $user->email }}</td>
             <td>{{ $user->role }}</td>
+            <td>{{ $user->created_at }}</td>
             <td>
                 <a href="{{ route('staff.data-user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                 <form action="{{ route('staff.data-user.destroy', $user->id) }}" method="POST" style="display:inline;">

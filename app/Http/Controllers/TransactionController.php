@@ -100,4 +100,26 @@ class TransactionController extends Controller
 
         return redirect()->back()->with('success', 'Transaksi berhasil dihapus sementara');
     }
+
+    public function chartPengeluaran()
+    {
+        $user = Auth::id();
+
+        $pengeluaran = Transaction::where('user_id', $user)
+            ->orderBy('date')
+            ->get();
+
+        $labels = [];
+        $data = [];
+
+        foreach ($pengeluaran as $pengeluaran) {
+            $labels[] = $pengeluaran->date;
+            $data[] = $pengeluaran->amount;
+        }
+
+        return response()->json([
+            'labels' => $labels,
+            'data' => $data
+        ]);
+    }
 }

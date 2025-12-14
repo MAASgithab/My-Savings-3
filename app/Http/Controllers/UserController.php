@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\UsersExport;
 
 class UserController extends Controller
 {
@@ -278,5 +280,10 @@ class UserController extends Controller
         $totalSavings = $user->savings->sum('amount'); // total tabungan user
 
         return view('index', compact('targets', 'transactions', 'totalExpenses', 'totalSavings'));
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 }

@@ -8,6 +8,7 @@
         <div>
             <a href="{{ route('admin.data-staff.create') }}" class="btn btn-primary">Tambah Staff</a>
             <a href="{{ route('admin.data-staff.trash') }}" class="btn btn-secondary">Trash</a>
+            <a href="{{ route('admin.data-staff.export') }}" class ="btn btn-success">Export</a>
         </div>
         <h5>Data Staff</h5>
         <table id="staffTable" class="table table-striped">
@@ -17,6 +18,7 @@
                     <th scope="col">Nama</th>
                     <th scope="col">Email</th>
                     <th scope="col">Role</th>
+                    <th scope="col">Waktu Bergabung</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -27,6 +29,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->role }}</td>
+                        <td>{{ $user->created_at }}</td>
                         <td>
                             <a href="{{ route('admin.data-staff.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('admin.data-staff.destroy', $user->id) }}" method="POST"

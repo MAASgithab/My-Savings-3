@@ -272,11 +272,74 @@
                     </div>
                 </div>
             </div>
+            {{-- chart pengeluaran --}}
+            <div class="row">
+                <div class="col-12">
+                    <canvas id="chartLine" class="w-100"></canvas>
+                </div>
+            </div>
+
         </div>
 
         <!-- Footer -->
         <footer class="text-center mt-5 mb-3 text-muted">
             <small>© 2025 Track Tabungan</small>
         </footer>
-        </div>
     @endsection
+
+    @push('script')
+    <script>
+        let labelChart = [];
+        let dataChart = [];
+
+        $(function(){
+            $.ajax({
+                url: "{{ route('transactions.chart') }}",
+                method: "GET",
+                success: function(response){
+                    labelChart = response.labels;
+                    dataChart = response.data;
+                    showChart();
+                },
+                error: function(err){
+                    alert('Gagal mengambil data');
+                }
+            });
+        });
+
+        function showChart(){
+            const ctx = document.getElementById('chartLine');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labelChart,
+                    datasets: [{
+                        label: '# Pengeluaran',
+                        data: dataChart,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Jumlah'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tanggal'
+                            }
+                        }
+                    }
+                }
+            })
+        }
+    </script>
+    @endpush

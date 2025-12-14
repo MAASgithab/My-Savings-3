@@ -31,6 +31,7 @@ Route::middleware('isUser')->group(function () {
     Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
     Route::delete('/transactions/{id}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
+    Route::get('/transactions/chart', [TransactionController::class, 'chartPengeluaran'])->name('transactions.chart');
     Route::prefix('/savings')->group(function () {
         Route::get('/', [SavingController::class, 'index'])->name('savings.index');
         Route::post('/store', [SavingController::class, 'store'])->name('savings.store');
@@ -59,6 +60,7 @@ Route::middleware('isAdmin')->prefix('/admin')->group(function () {
         Route::patch('/restore/{id}', [UserController::class, 'restore'])->name('admin.data-staff.restore');
         Route::delete('/force-delete/{id}', [UserController::class, 'forceDelete'])->name('admin.data-staff.force-delete');
         Route::get('/trash', [UserController::class, 'trash'])->name('admin.data-staff.trash');
+        Route::get('/export', [UserController::class, 'exportExcel'])->name('admin.data-staff.export');
     });
 });
 
@@ -80,5 +82,3 @@ Route::middleware('isStaff')->prefix('/staff')->group(function () {
         Route::delete('/force-delete/{id}', [UserController::class, 'forceDeleteUser'])->name('staff.data-user.force-delete');
     });
 });
-
-Route::middleware('isUser')->group(function () {});

@@ -273,6 +273,8 @@
                 </div>
             </div>
             {{-- chart pengeluaran --}}
+            <br>
+            <br>
             <div class="row">
                 <div class="col-12">
                     <canvas id="chartLine" class="w-100"></canvas>

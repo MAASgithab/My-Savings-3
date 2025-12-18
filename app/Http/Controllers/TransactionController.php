@@ -42,7 +42,6 @@ class TransactionController extends Controller
 
         $user = Auth::user();  // Ambil user saat ini
 
-        // Ambil tabungan pertama user
         $saving = $user->savings()->first();
 
         if (! $saving || $saving->amount < $request->amount) {

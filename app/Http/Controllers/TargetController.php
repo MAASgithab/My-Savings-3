@@ -56,7 +56,6 @@ class TargetController extends Controller
         ]);
     }
 
-    // Sekarang dijamin sudah ada $saving->id
     Target::create([
         'user_id' => Auth::id(),
         'savings_id' => $saving->id,

@@ -1,6 +1,11 @@
 @extends('templates.app')
 
 @section('content')
+@if(session('error'))
+    <div class="alert alert-warning">
+        {{ session('error') }}
+    </div>
+@endif
 <div class="container mt-5">
     <h3>🧾 Tambah Pengeluaran</h3>
 
